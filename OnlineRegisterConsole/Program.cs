@@ -16,9 +16,9 @@ namespace OnlineRegisterConsole
             {
                 Console.WriteLine("*** ONLINE REGISTER BY VALLAURI ***\n");
                 Console.WriteLine("1 - Initialize Student");
-                Console.WriteLine("2 - ");
-                Console.WriteLine("3 - ");
-                Console.WriteLine("4 - ");
+                Console.WriteLine("2 - Initialize Teacher");
+                Console.WriteLine("3 - Initialize Subject");
+                Console.WriteLine("4 - Initialize Class");
                 Console.WriteLine("----------------");
                 Console.WriteLine("5 - View Data");
                 Console.WriteLine("----------------");
@@ -31,14 +31,22 @@ namespace OnlineRegisterConsole
                 switch (choice)
                 {
                     case '1':
-                        // Console.WriteLine("Call student list");
-                        InitializeStudent();
+                        Initialize("Student");
                         break;
                     case '2':
-                        Console.WriteLine("Call class list");
+                        Initialize("Teacher");
+                        break;
+                    case '3':
+                        Initialize("Subject");
+                        break;
+                    case '4':
+                        Initialize("Class");
                         break;
                     case '5':
-                        ViewData();
+                        ViewData("Student");
+                        ViewData("Teacher");
+                        ViewData("Subject");
+                        ViewData("Class");
                         break;
                     default:
                         Console.WriteLine("Work in progress");
@@ -47,19 +55,26 @@ namespace OnlineRegisterConsole
             } while (choice != 'X' && choice != 'x');
         }
 
-        private static void InitializeStudent()
+        private static void Initialize(string tableName)
         {
-            Console.Write("\n*** INITIALIZE STUDENT TABLE ***\n");
-            Console.WriteLine(db.ExecuteSqlScript(SCRIPT_PATH + "StudentCreateTable.sql"));
-            Console.Write(db.ExecuteSqlScript(SCRIPT_PATH + "StudentInsert.sql"));
+            Console.Write("\n*** INITIALIZE " + tableName.ToUpper() + " TABLE ***\n");
+            Console.WriteLine(db.ExecuteSqlScript(SCRIPT_PATH + tableName + "CreateTable.sql"));
+            Console.Write(db.ExecuteSqlScript(SCRIPT_PATH + tableName + "Insert.sql"));
             Console.Write("\n****************\n\n");
         }
 
-        public static void ViewData()
+        public static void ViewData(string tableName)
         {
-            Console.Write("\n*** STUDENTS ***\n");
-            Console.Write(db.GetTableList("Student"));
-            Console.Write("****************\n\n");
+            try
+            {
+                Console.Write("\n*** " + tableName.ToUpper() + " ***\n");
+                Console.Write(db.GetTableList(tableName));
+                Console.Write("****************\n\n");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("\n*** PROBLEM WITH THE DATA ***\n\n");
+            }
         }
     }
 }

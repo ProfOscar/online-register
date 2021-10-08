@@ -51,7 +51,11 @@ namespace OnlineRegisterClassLibrary
                     {
                         while (dbReader.Read())
                         {
-                            stOut += dbReader.GetString(1) + " - " + dbReader.GetString(2) + "\n";
+                            for (int i = 0; i < dbReader.FieldCount; i++)
+                            {
+                                stOut += dbReader.GetValue(i) + " - ";
+                            }
+                            stOut = stOut.Remove(stOut.Length-3) + "\n";
                         }
                     }
                 }
