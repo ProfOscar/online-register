@@ -19,12 +19,14 @@ namespace OnlineRegisterConsole
                 Console.WriteLine("2 - Initialize Teacher");
                 Console.WriteLine("3 - Initialize Subject");
                 Console.WriteLine("4 - Initialize Class");
+                Console.WriteLine("5 - Initialize Mark");
                 Console.WriteLine("----------------");
-                Console.WriteLine("5 - View Data");
+                Console.WriteLine("9 - View Data");
                 Console.WriteLine("----------------");
                 Console.WriteLine("B - Backup Data");
                 Console.WriteLine("T - Restore Data");
                 Console.WriteLine("R - Reset Data");
+                Console.WriteLine("Z - Zap Data (DANGEROUS!)");
                 Console.WriteLine("----------------");
                 Console.WriteLine("X - EXIT\n");
                 choice = Console.ReadKey(true).KeyChar;
@@ -43,10 +45,22 @@ namespace OnlineRegisterConsole
                         Initialize("Class");
                         break;
                     case '5':
+                        Initialize("Mark");
+                        break;
+                    case '9':
                         ViewData("Student");
                         ViewData("Teacher");
                         ViewData("Subject");
                         ViewData("Class");
+                        ViewData("Mark");
+                        break;
+                    case 'R':
+                    case 'r':
+                        ResetData();
+                        break;
+                    case 'Z':
+                    case 'z':
+                        ZapData();
                         break;
                     default:
                         Console.WriteLine("Work in progress");
@@ -61,6 +75,8 @@ namespace OnlineRegisterConsole
             Console.WriteLine(db.ExecuteSqlScript(SCRIPT_PATH + tableName + "CreateTable.sql"));
             Console.Write(db.ExecuteSqlScript(SCRIPT_PATH + tableName + "Insert.sql"));
             Console.Write("\n****************\n\n");
+            System.Threading.Thread.Sleep(2000);
+            Console.Clear();
         }
 
         public static void ViewData(string tableName)
@@ -75,6 +91,26 @@ namespace OnlineRegisterConsole
             {
                 Console.WriteLine("\n*** PROBLEM WITH THE DATA ***\n\n");
             }
+        }
+
+        private static void ResetData()
+        {
+            Console.Write("\n*** RESET THE DB DATA ***\n");
+            ZapData();
+            Initialize("Student");
+            Initialize("Teacher");
+            Initialize("Subject");
+            Initialize("Class");
+            Initialize("Mark");
+        }
+
+        private static void ZapData()
+        {
+            Console.Write("\n*** ZAP ALL TABLES ***\n");
+            Console.WriteLine(db.ExecuteSqlScript(SCRIPT_PATH + "ZapData.sql"));
+            Console.Write("\n****************\n\n");
+            System.Threading.Thread.Sleep(2000);
+            Console.Clear();
         }
     }
 }
