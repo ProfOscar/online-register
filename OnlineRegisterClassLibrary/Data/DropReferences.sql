@@ -1,7 +1,7 @@
-﻿ALTER TABLE Student DROP CONSTRAINTS FK_StudentClass
-ALTER TABLE Mark DROP CONSTRAINTS FK_MarkStudent
-ALTER TABLE ClassTeacherSubject DROP CONSTRAINTS FK_ThisClass
-ALTER TABLE ClassTeacherSubject DROP CONSTRAINTS FK_ThisTeacher
-ALTER TABLE ClassTeacherSubject DROP CONSTRAINTS FK_ThisSubject
-ALTER TABLE MarkClassTeacherSubject DROP CONSTRAINTS FK_ThisMark
-ALTER TABLE MarkClassTeacherSubject DROP CONSTRAINTS FK_ThisClassTeacherSubject
+﻿ALTER TABLE Student DROP CONSTRAINT FK_StudentClass
+ALTER TABLE Mark DROP CONSTRAINT FK_MarkStudent
+ALTER TABLE ClassTeacherSubject DROP CONSTRAINT FK_ThisClass
+ALTER TABLE ClassTeacherSubject DROP CONSTRAINT FK_ThisTeacher
+ALTER TABLE ClassTeacherSubject DROP CONSTRAINT FK_ThisSubject
+ALTER TABLE MarkClassTeacherSubject DROP CONSTRAINT FK_ThisMark
+ALTER TABLE MarkClassTeacherSubject DROP CONSTRAINT FK_ThisClassTeacherSubject

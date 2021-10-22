@@ -20,6 +20,7 @@ namespace OnlineRegisterConsole
                 Console.WriteLine("3 - Initialize Subject");
                 Console.WriteLine("4 - Initialize Class");
                 Console.WriteLine("5 - Initialize Mark");
+                Console.WriteLine("6 - Add References");
                 Console.WriteLine("----------------");
                 Console.WriteLine("9 - View Data");
                 Console.WriteLine("----------------");
@@ -47,12 +48,17 @@ namespace OnlineRegisterConsole
                     case '5':
                         Initialize("Mark");
                         break;
+                    case '6':
+                        AddReferences();
+                        break;
                     case '9':
                         ViewData("Student");
                         ViewData("Teacher");
                         ViewData("Subject");
                         ViewData("Class");
                         ViewData("Mark");
+                        ViewData("ClassTeacherSubject");
+                        ViewData("MarkClassTeacherSubject");
                         break;
                     case 'R':
                     case 'r':
@@ -76,7 +82,17 @@ namespace OnlineRegisterConsole
             Console.Write(db.ExecuteSqlScript(SCRIPT_PATH + tableName + "Insert.sql"));
             Console.Write("\n****************\n\n");
             System.Threading.Thread.Sleep(2000);
-            Console.Clear();
+            // Console.Clear();
+        }
+
+        private static void AddReferences()
+        {
+            Console.Write("\n*** SET REFERENCES ***\n");
+            Console.WriteLine(db.ExecuteSqlScript(SCRIPT_PATH + "AddReferences.sql"));
+            Console.WriteLine(db.ExecuteSqlScript(SCRIPT_PATH + "ReferencesInsert.sql"));
+            Console.Write("\n****************\n\n");
+            System.Threading.Thread.Sleep(2000);
+            // Console.Clear();
         }
 
         public static void ViewData(string tableName)
@@ -102,15 +118,17 @@ namespace OnlineRegisterConsole
             Initialize("Subject");
             Initialize("Class");
             Initialize("Mark");
+            AddReferences();
         }
 
         private static void ZapData()
         {
             Console.Write("\n*** ZAP ALL TABLES ***\n");
+            Console.WriteLine(db.ExecuteSqlScript(SCRIPT_PATH + "DropReferences.sql"));
             Console.WriteLine(db.ExecuteSqlScript(SCRIPT_PATH + "ZapData.sql"));
             Console.Write("\n****************\n\n");
             System.Threading.Thread.Sleep(2000);
-            Console.Clear();
+            // Console.Clear();
         }
     }
 }
