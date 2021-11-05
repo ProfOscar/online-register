@@ -8,12 +8,22 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <h2>Online Register</h2>
+    <form id="MainForm" runat="server">
         <div>
-            <asp:Button ID="BtnStudent" runat="server" Text="STUDENTI" OnClick="BtnStudent_Click" />
-            <asp:Button ID="BtnTeacher" runat="server" Text="DOCENTI" OnClick="BtnTeacher_Click" />
+            <asp:Label ID="LblDatiTabella" runat="server" Text="Visualizza Dati Tabella: "></asp:Label>
+            <asp:DropDownList ID="DropDownListTabelle" runat="server"></asp:DropDownList>
             <br />
-            <asp:Label ID="LblOutput" runat="server" Text="(qui appariranno i dati)"></asp:Label>
+            <asp:Label ID="LblVotiStudente" runat="server" Text="Visualizza Voti Studente: "></asp:Label>
+            <asp:DropDownList ID="DropDownListStudenti" runat="server"></asp:DropDownList>
+            <br />
+            <asp:Label ID="LblVotiClasse" runat="server" Text="Visualizza Voti Classe: "></asp:Label>
+            <asp:DropDownList ID="DropDownListClassi" runat="server"></asp:DropDownList>
+            <br />
+            <asp:Label ID="LblVotiMateria" runat="server" Text="Visualizza Voti Materia: "></asp:Label>
+            <asp:DropDownList ID="DropDownListMaterie" runat="server"></asp:DropDownList>
+            <br />
+            <asp:GridView ID="GridViewTable" runat="server"></asp:GridView>
         </div>
     </form>
 </body>

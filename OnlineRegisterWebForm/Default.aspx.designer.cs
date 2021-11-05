@@ -15,39 +15,93 @@ namespace OnlineRegisterWebForm
     {
 
         /// <summary>
-        /// Controllo form1.
+        /// Controllo MainForm.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlForm MainForm;
 
         /// <summary>
-        /// Controllo BtnStudent.
+        /// Controllo LblDatiTabella.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnStudent;
+        protected global::System.Web.UI.WebControls.Label LblDatiTabella;
 
         /// <summary>
-        /// Controllo BtnTeacher.
+        /// Controllo DropDownListTabelle.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnTeacher;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListTabelle;
 
         /// <summary>
-        /// Controllo LblOutput.
+        /// Controllo LblVotiStudente.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblOutput;
+        protected global::System.Web.UI.WebControls.Label LblVotiStudente;
+
+        /// <summary>
+        /// Controllo DropDownListStudenti.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListStudenti;
+
+        /// <summary>
+        /// Controllo LblVotiClasse.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblVotiClasse;
+
+        /// <summary>
+        /// Controllo DropDownListClassi.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListClassi;
+
+        /// <summary>
+        /// Controllo LblVotiMateria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblVotiMateria;
+
+        /// <summary>
+        /// Controllo DropDownListMaterie.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListMaterie;
+
+        /// <summary>
+        /// Controllo GridViewTable.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewTable;
     }
 }
