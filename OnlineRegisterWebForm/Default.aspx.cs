@@ -1,61 +1,73 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace OnlineRegisterWebForm
 {
     public partial class Default : System.Web.UI.Page
     {
-        const string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\data\onlineregister\register.mdf;Integrated Security=True;Connect Timeout=30";
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                string sql = "SELECT LastName FROM Student ORDER BY LastName";
-                DropDownListStudenti.DataSource = GetDataForCombo(sql);
+                DbTools db = new DbTools();
+                string sql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES;";
+                DropDownListTabelle.DataSource = db.GetDataList(sql);
+                DropDownListTabelle.DataBind();
+                sql = "SELECT Id, CONCAT(Firstname,' ',LastName) as Description FROM Student ORDER BY LastName, FirstName";
+                DropDownListStudenti.DataValueField = "Id";
+                DropDownListStudenti.DataTextField = "Description";
+                DropDownListStudenti.DataSource = db.GetDataTable(sql);
                 DropDownListStudenti.DataBind();
+                sql = "SELECT Id, CONCAT(Year,Section,' ',Specialization) as Description FROM Class ORDER BY Specialization,Year,Section";
+                DropDownListClassi.DataValueField = "Id";
+                DropDownListClassi.DataTextField = "Description";
+                DropDownListClassi.DataSource = db.GetDataTable(sql);
+                DropDownListClassi.DataBind();
+                sql = "SELECT Id, Description FROM Subject ORDER BY Description";
+                DropDownListMaterie.DataValueField = "Id";
+                DropDownListMaterie.DataTextField = "Description";
+                DropDownListMaterie.DataSource = db.GetDataTable(sql);
+                DropDownListMaterie.DataBind();
+                // load first table at first launch
+                DropDownListTabelle_SelectedIndexChanged(sender, e);
             }
         }
 
-        public DataTable GetDataTable(string tableName)
+        protected void DropDownListTabelle_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DbTools db = new DbTools();
+            string tableName = DropDownListTabelle.SelectedValue;
             string query = "SELECT * FROM " + tableName;
-            SqlConnection conn = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(query, conn);
-            conn.Open();
-            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-            DataTable table = new DataTable();
-            adapter.Fill(table);
-            conn.Close();
-            adapter.Dispose();
-            return table;
+            loadData(query);
         }
 
-        public List<string> GetDataForCombo(string sqlQuery)
+        protected void DropDownListStudenti_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<string> lstOut = new List<string>(); ;
-            using (SqlConnection dbConn = new SqlConnection(connectionString))
-            {
-                using (SqlCommand dbCmd = new SqlCommand(sqlQuery, dbConn))
-                {
-                    dbConn.Open();
-                    using (SqlDataReader dbReader = dbCmd.ExecuteReader())
-                    {
-                        while (dbReader.Read())
-                        {
-                            lstOut.Add(dbReader.GetString(0));
-                        }
-                    }
-                }
-            }
-            return lstOut;
+            int studentId = int.Parse(DropDownListStudenti.SelectedValue);
+            // Response.Write(studentId);
+            string query = "SELECT ...";
+            loadData(query);
         }
 
+        protected void DropDownListClassi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int classId = int.Parse(DropDownListClassi.SelectedValue);
+            string query = "SELECT ...";
+            loadData(query);
+        }
+
+        protected void DropDownListMaterie_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int subjectId = int.Parse(DropDownListMaterie.SelectedValue);
+            string query = "SELECT ...";
+            loadData(query);
+        }
+
+        private void loadData(string sqlQuery)
+        {
+            GridViewTable.DataSource = new DbTools().GetDataTable(sqlQuery);
+            GridViewTable.DataBind();
+        }
     }
 }

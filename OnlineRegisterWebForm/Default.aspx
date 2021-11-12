@@ -12,17 +12,17 @@
     <form id="MainForm" runat="server">
         <div>
             <asp:Label ID="LblDatiTabella" runat="server" Text="Visualizza Dati Tabella: "></asp:Label>
-            <asp:DropDownList ID="DropDownListTabelle" runat="server"></asp:DropDownList>
+            <asp:DropDownList ID="DropDownListTabelle" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownListTabelle_SelectedIndexChanged"></asp:DropDownList>
             <br />
             <asp:Label ID="LblVotiStudente" runat="server" Text="Visualizza Voti Studente: "></asp:Label>
-            <asp:DropDownList ID="DropDownListStudenti" runat="server"></asp:DropDownList>
+            <asp:DropDownList ID="DropDownListStudenti" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownListStudenti_SelectedIndexChanged"></asp:DropDownList>
             <br />
             <asp:Label ID="LblVotiClasse" runat="server" Text="Visualizza Voti Classe: "></asp:Label>
-            <asp:DropDownList ID="DropDownListClassi" runat="server"></asp:DropDownList>
+            <asp:DropDownList ID="DropDownListClassi" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownListClassi_SelectedIndexChanged"></asp:DropDownList>
             <br />
             <asp:Label ID="LblVotiMateria" runat="server" Text="Visualizza Voti Materia: "></asp:Label>
-            <asp:DropDownList ID="DropDownListMaterie" runat="server"></asp:DropDownList>
-            <br />
+            <asp:DropDownList ID="DropDownListMaterie" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownListMaterie_SelectedIndexChanged"></asp:DropDownList>
+            <br /> <br />
             <asp:GridView ID="GridViewTable" runat="server"></asp:GridView>
         </div>
     </form>
