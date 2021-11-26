@@ -46,14 +46,16 @@ namespace OnlineRegisterWebForm
         {
             int studentId = int.Parse(DropDownListStudenti.SelectedValue);
             // Response.Write(studentId);
-            string query = "SELECT ...";
+            // string query = $"SELECT * FROM Mark WHERE IdStudent = {studentId};";
+
+            string query = $"SELECT DISTINCT CONCAT(st.FirstName, ' ', st.LastName, ' (', c.Year, '-', c.Section, '-', c.Specialization, ')') as Nominativo,su.Description as Materia, m.[When] as Data, m.Mark as Voto FROM Student st, Subject su, Class c, Mark m, MarkClassTeacherSubject mcts, ClassTeacherSubject cts WHERE(st.Id = m.IdStudent) AND cts.Id = mcts.IdClassTeacherSubject AND m.Id = mcts.IdMark AND c.Id = cts.IdClass AND cts.IdSubject=su.Id AND st.ID = { studentId } ORDER BY su.Description ASC, m.[When] DESC";
             loadData(query);
         }
 
         protected void DropDownListClassi_SelectedIndexChanged(object sender, EventArgs e)
         {
             int classId = int.Parse(DropDownListClassi.SelectedValue);
-            string query = "SELECT ...";
+            string query = $"SELECT su.Description as Materia,CONCAT(c.Year,'-',c.Section,'-',c.Specialization) as Classe,CONCAT(st.FirstName ,'_',st.LastName) as Nominativo, su.Description as Materia, m.[When] as Data, m.Mark as Voto FROM Student st, Subject su, Class c, Mark m, MarkClassTeacherSubject mcts, ClassTeacherSubject cts WHERE(st.Id = m.IdStudent) AND cts.Id = mcts.IdClassTeacherSubject AND m.Id = mcts.IdMark AND c.Id = cts.IdClass AND cts.IdSubject=su.Id AND su.Id = {classId} ORDER BY Nominativo, m.[When] DESC;";
             loadData(query);
         }
 
