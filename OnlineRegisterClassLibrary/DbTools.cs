@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 
 namespace OnlineRegisterClassLibrary
@@ -7,7 +8,7 @@ namespace OnlineRegisterClassLibrary
     {
         private string ConnectionString;
 
-        public DbTools(string connStr)
+        public DbTools(string connStr=@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\data\onlineregister\register.mdf;Integrated Security=True;Connect Timeout=30")
         {
             ConnectionString = connStr;
         }
@@ -61,6 +62,19 @@ namespace OnlineRegisterClassLibrary
                 }
             }
             return stOut;
+        }
+
+        public DataTable GetDataTable(string sqlQuery)
+        {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            SqlCommand cmd = new SqlCommand(sqlQuery, conn);
+            conn.Open();
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+            conn.Close();
+            adapter.Dispose();
+            return table;
         }
     }
 }
