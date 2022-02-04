@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineRegisterClassLibrary;
 using OnlineRegisterClassLibrary.Models;
+using OnlineRegisterWebService.Models;
 
 namespace OnlineRegisterWebService.Controllers
 {
@@ -16,11 +17,11 @@ namespace OnlineRegisterWebService.Controllers
     {
         // GET: api/Students
         [HttpGet]
-        public IEnumerable<Student> Get()
+        public IEnumerable<StudentDetailDto> Get()
         {
             DbTools dBTools = new DbTools();
             var data = dBTools.GetDataTable(@"SELECT * FROM Student s, Class c WHERE s.IdClass = c.Id;");
-            List<Student> students = new List<Student>();
+            List<StudentDetailDto> students = new List<StudentDetailDto>();
             foreach (DataRow item in data.Rows)
             {
                 students.Add(ParseToStudent(item));
@@ -30,7 +31,7 @@ namespace OnlineRegisterWebService.Controllers
 
         // GET: api/Students/5
         [HttpGet("{id}", Name = "Get")]
-        public ActionResult<Student> Get(int id)
+        public ActionResult<StudentDetailDto> Get(int id)
         {
             DbTools dBTools = new DbTools();
             var data = dBTools.GetDataTable(@"SELECT * FROM Student s, Class c WHERE s.IdClass = c.Id AND s.Id = "+id);
@@ -40,9 +41,9 @@ namespace OnlineRegisterWebService.Controllers
                 return NotFound();
         }
 
-        private Student ParseToStudent(DataRow item)
+        private StudentDetailDto ParseToStudent(DataRow item)
         {
-            Student s = new Student();
+            StudentDetailDto s = new StudentDetailDto();
             s.Id = Convert.ToInt32(item[0]);
             s.FirstName = item["FirstName"].ToString();
             s.LastName = item["LastName"].ToString();
@@ -52,6 +53,7 @@ namespace OnlineRegisterWebService.Controllers
             c.Section = item["Section"].ToString();
             c.Specialization = item["Specialization"].ToString();
             s.Classroom = c;
+            s.ClassShort = c.Year.ToString() + c.Specialization + c.Section;
             return s;
         }
 
