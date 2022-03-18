@@ -15,11 +15,13 @@ namespace OnlineRegisterWebService.Controllers
     [ApiController]
     public class StudentsController : ControllerBase
     {
+        string conn = "Data Source=registerprofoscar.database.windows.net;Initial Catalog=registerprofoscar;User ID=profoscar;Password=Pass1Vallauri!;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        
         // GET: api/Students
         [HttpGet]
         public IEnumerable<StudentDetailDto> Get()
         {
-            DbTools dBTools = new DbTools();
+            DbTools dBTools = new DbTools(conn);
             var data = dBTools.GetDataTable(@"SELECT * FROM Student s, Class c WHERE s.IdClass = c.Id;");
             List<StudentDetailDto> students = new List<StudentDetailDto>();
             foreach (DataRow item in data.Rows)
